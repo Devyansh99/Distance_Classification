@@ -1,0 +1,23 @@
+name: Automated ML Workflow
+
+on: [push]  # Runs every time you push to GitHub
+
+jobs:
+  run-ml-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set Up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install Dependencies
+        run: |
+          pip install numpy pandas scikit-learn wandb
+
+      - name: Run Distance Classifier
+        run: python distance_classifier.py
